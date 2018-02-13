@@ -35,20 +35,19 @@
 </form>
 
 <?php
-    $username = $password = "";
+    $user = $password = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $username = clean_login($_POST["username"]);
-        $password = clean_login($_POST["password"]);
+        $user = clean_login($_POST["username"]);
+        $pass = clean_login($_POST["password"]);
 
-        /*
         //log in for actual server
         $server = "192.168.194.154";
         $port = "3306";
-        $username = "";
-        $password = "";
-        $dbname = "";
+        $username = "user";
+        $password = "papa-pizza";
+        $dbname = "pizzaorderapp";
 
 
         //create connection to DB
@@ -61,35 +60,27 @@
         }
 
         //store queries in variable
-        $sql_check = "SELECT pass FROM login WHERE username = $username";
+        $sql_check = "SELECT password FROM user_accounts WHERE username = '$user'";
 
         //store results in variable
         $sqlpass = $connection->query($sql_check);
 
         //retrieve first row of query
-        $retrieveDB=$sqlpass->fetch_assoc()
+        if($sqlpass->num_rows > 0) {
+            while ($retrieveDB = $sqlpass->fetch_assoc()) {
 
-        //check credentials
-        if ($password == $retrieveDB["pass"])
-        {
-            header("Location: ParetoMainMenu.php");
-            exit();
+                //check credentials
+                if ($pass == $retrieveDB["password"]) {
+                    header("Location: ParetoMainMenu.php");
+                    exit();
+                }
+                else {
+                    echo "Login credentials invalid. Please try again.";
+                }
+            }
         }
-        else
-        {
-            echo "Login credentials invalid. Please try again.";
-        }
-        */
-
-        //check credentials
-        if ($username == "admin" && $password =="pass")
-        {
-            header("Location: ParetoMainMenu.php");
-            exit();
-        }
-        else
-        {
-            echo "Login credentials invalid. Please try again.";
+        else{
+            echo "Username not recognized.";
         }
     }
 ?>
