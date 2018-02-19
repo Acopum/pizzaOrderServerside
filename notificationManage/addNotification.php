@@ -8,7 +8,7 @@
         return $data;
     }
 
-    //log in for actual server
+    //log in for server
     $server = "192.168.194.154";
     $port = "3306";
     $username = "user";
@@ -33,7 +33,6 @@
         $date= cleanup($_POST["dateField"]);
         $content= cleanup($_POST["contentField"]);
 
-        //if any fields unchanged, use old info
         if($idno == "" || $type == "" || $content == "" || $date == ""){
             echo "<input type=\"hidden\" name=\"subUsed\" value=0 />";
             echo "One of the fields is empty";
@@ -58,7 +57,7 @@
     <table>
         <tr>
             <td></td>
-            <td>New Data</td>
+            <td>New data to be added</td>
         </tr>
 
 <?php

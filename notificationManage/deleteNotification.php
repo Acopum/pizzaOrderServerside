@@ -1,5 +1,8 @@
 <?php
-    //log in for actual server
+    //id comes from last page
+    $idno = $id;
+
+    //log in for server
     $server = "192.168.194.154";
     $port = "3306";
     $username = "user";
@@ -16,7 +19,7 @@
     }
 
     //store queries in variable
-    $selectNotification = "DELETE FROM promotions WHERE number=$id";
+    $selectNotification = "DELETE FROM promotions WHERE number=$idno";
 
     if($connection->query($selectNotification) == TRUE){
         echo "Notification successfully deleted";

@@ -21,7 +21,7 @@
 </p>
 
 <?php
-    //log in for actual server
+    //log in for server
     $server = "192.168.194.154";
     $port = "3306";
     $username = "user";
