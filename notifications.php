@@ -69,6 +69,7 @@
 
             //action buttons
             echo "<td><form method=\"post\" action=\"notificationManage\manageNotification.php\">
+                           <input type=\"submit\" name=\"action\" value=\"Assign\"/>
                            <input type=\"submit\" name=\"action\" value=\"Edit\"/>
                            <input type=\"submit\" name=\"action\" value=\"Delete\"/>
                            <input type=\"hidden\" name=\"id\" value=$id />

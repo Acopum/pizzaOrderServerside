@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
     else {
         //store queries in variable
         $hash = md5($pass.$salt);
-        $addQuery = "INSERT INTO user_accounts VALUES ('$user', '$hash', 'None', 0, 'admin', '$salt')";
+        $addQuery = "INSERT INTO user_accounts VALUES ('$user', '$hash', 'admin', '$salt', 0)";
         $addTime = "INSERT INTO user_login VALUES ('$user', 0, 0)";
 
         //run query and check success

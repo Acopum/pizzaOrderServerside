@@ -27,6 +27,10 @@
     {
         include('deleteNotification.php');
     }
+    else if($_POST["action"]=="Assign")
+    {
+        include('assignNotification.php');
+    }
     else if($_POST["action"]=="Add New Notification")
     {
         include('addNotification.php');
