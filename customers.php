@@ -46,14 +46,14 @@ $customers = $connection->query($selectCustomer);
 
 <table>
     <tr>
-        <td>Username</td>
+        <td>Customer Username</td>
         <td>Active Notifications</td>
     </tr>
 
     <?php
     //run through patient_data table and populate patient info page
-    if($admins->num_rows > 0){
-        while($row=$admins->fetch_assoc()){
+    if($customers->num_rows > 0){
+        while($row=$customers->fetch_assoc()){
             echo "<tr>";
 
             $user = $row["username"];

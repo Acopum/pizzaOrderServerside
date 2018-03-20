@@ -2,15 +2,6 @@
 //notification ID comes from last page
 $idno = $id;
 
-//function escapes dangerous characters
-function cleanup($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
 //log in for server
 $server = "192.168.194.154";
 $port = "3306";
@@ -30,33 +21,28 @@ if($connection->connect_error)
 //if submit has been used
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
-    //clean data
-    $type = cleanup($_POST["typeField"]);
-    $date= cleanup($_POST["dateField"]);
-    $content= cleanup($_POST["contentField"]);
+    $specifiedUser = $_POST['userSelect'];
+    $specifiedPromoNo = $_POST['promoNum'];
 
-    //if any fields unchanged, use old info
-    if($type == ""){
-        $type = $_POST["typeOld"];
+    if(empty($specifiedUser))
+    {
+        echo("No users selected");
     }
+    else
+    {
+        $numberUsers = count($specifiedUser);
 
-    if($date == ""){
-        $date = $_POST["dateOld"];
-    }
+        for($i=0; $i<$numberUsers;$i++)
+        {
+            //store update query in variable
+            $insertQuery = "INSERT INTO assign_promotion (username, promoID) VALUES (' $specifiedUser[$i]', $idno)";
+            $setNotification = $connection->query($insertQuery);
 
-    if($content == ""){
-        $content = $_POST["contentOld"];
-    }
+            $newPromoNumber =  $specifiedPromoNo[i]+1;
 
-    //store update query in variable
-    $updateQuery = "UPDATE promotions SET date='$date',notification_type='$type',messages='$content' WHERE number = $idno";
-
-    //run query and check success
-    if ($connection->query($updateQuery) == TRUE) {
-        echo "Notification updated successfully.";
-    }
-    else {
-        echo "Error: " . $connection->error;
+            $updateQuery = "UPDATE user_accounts SET promotions=$newPromoNumber WHERE username = '$specifiedUser[$i]'";
+            $updatePromo = $connection->query($updateQuery);
+        }
     }
 }
 
@@ -72,13 +58,10 @@ $selectNotification = $connection->query($selectQuery);
         <table>
             <tr>
                 <th></th>
-                <th>Old Notification Data</th>
-                <th>New Notification Data</th>
+                <th>Notification Data</th>
             </tr>
 
             <?php
-            //initialize variables
-            $type = $date = $content = "";
 
             echo "<input type=\"hidden\" name=\"subUsed\" value=0 />";
 
@@ -92,37 +75,27 @@ $selectNotification = $connection->query($selectQuery);
                     echo "<tr>";
                     echo "<td>ID</td>";
                     echo "<td>$idno</td>";
-                    echo "<td>ID number cannot be edited</td>";
                     echo "</tr>";
 
                     echo "<tr>";
                     echo "<td>Date</td>";
                     echo "<td>$date</td>";
-                    echo "<td><input type=\"text\" name=\"dateField\"></td>";
                     echo "</tr>";
 
                     echo "<tr>";
                     echo "<td>Type</td>";
                     echo "<td>$type</td>";
-                    echo "<td><input type=\"text\" name=\"typeField\"></td>";
                     echo "</tr>";
 
                     echo "<tr>";
                     echo "<td>Content</td>";
                     echo "<td>$content</td>";
-                    echo "<td><input type=\"text\" name=\"contentField\"></td>";
                     echo "</tr>";
 
                     //store action, id, and whether submit is used
-                    echo "<input type=\"hidden\" name=\"action\" value=\"Edit\" />";
+                    echo "<input type=\"hidden\" name=\"action\" value=\"Assign\" />";
                     echo "<input type=\"hidden\" name=\"id\" value=$idno />";
                     echo "<input type=\"hidden\" name=\"subUsed\" value=1 />";
-
-                    //store old data for POST
-                    echo "<input type=\"hidden\" name=\"dateOld\" value= \"$date\" />";
-                    echo "<input type=\"hidden\" name=\"typeOld\" value= \"$type\" />";
-                    echo "<input type=\"hidden\" name=\"contentOld\" value= \"$content\" />";
-
                 }
             }
             else{
@@ -131,6 +104,46 @@ $selectNotification = $connection->query($selectQuery);
             ?>
 
         </table>
+        <br>
+
+        <?php
+        //store queries in variable
+        $selectCustomer = "SELECT * FROM user_accounts WHERE privledge = 'customer' ";
+
+        //store results
+        $customers = $connection->query($selectCustomer);
+        ?>
+
+        <table>
+            <tr>
+                <td>Customer Username</td>
+                <td>Assign Notification</td>
+            </tr>
+
+            <?php
+            //run through patient_data table and populate patient info page
+            if($customers->num_rows > 0){
+                while($row=$customers->fetch_assoc()){
+                    echo "<tr>";
+
+                    $user = $row["username"];
+                    $notno = $row["promotions"];
+
+                    //rows filled from DB
+                    echo "<td>".$user."</td>";
+                    echo "<td><input type=\"checkbox\" name= \"userSelect[]\" value=$user></td>";
+                    echo "<input type=\"hidden\" name=\"promoNum[]\" value=$notno />";
+                    echo "<tr>";
+                }
+            }
+            //if patient_data is empty
+            else{
+                echo " No notifications found.";
+            }
+            ?>
+
+        </table>
+
         <br>
         <input type="submit" value="Submit">
     </form>
