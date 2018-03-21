@@ -38,10 +38,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
             //store update query in variable
             $insertQuery = "INSERT INTO assign_promotion (username, promoID) VALUES (' $specifiedUser[$i]', $idno)";
-            $setNotification = $connection->query($insertQuery);
 
-            $updateQuery = "UPDATE user_accounts SET promotions=$newPromoNumber WHERE username = '$specifiedUser[$i]'";
-            $updatePromo = $connection->query($updateQuery);
+            if($connection->query($insertQuery) == TRUE)
+            {
+                $updateQuery = "UPDATE user_accounts SET promotions=$newPromoNumber WHERE username = '$specifiedUser[$i]'";
+                $updatePromo = $connection->query($updateQuery);
+            }
         }
     }
 }
