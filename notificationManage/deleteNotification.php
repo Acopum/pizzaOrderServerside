@@ -19,13 +19,28 @@
     }
 
     //store queries in variable
-    $selectNotification = "DELETE FROM promotions WHERE number=$idno";
+    $deleteNotification = "DELETE FROM promotions WHERE number=$idno";
 
-    if($connection->query($selectNotification) == TRUE){
+    if($connection->query($deleteNotification) == TRUE){
+
+        $findNotification = "SELECT username FROM assign_promotion WHERE promoID=$idno";
+        $find = $connection->query($findNotification);
+
+        if($find->num_rows > 0){
+            while($row=$find->fetch_assoc()){
+                $userDelete = $row["username"];
+                $updateQuery = "UPDATE user_accounts SET promotions = promotions-1 WHERE username = TRIM('$userDelete')";
+                $updateIt = $connection->query($updateQuery);
+            }
+        }
+
+        $deleteNotification = "DELETE FROM assign_promotion WHERE promoID=$idno";
+        $delete = $connection->query($deleteNotification);
+
         echo "Notification successfully deleted";
     }
     else{
-        echo "Unable to delete notification. " . $connection->error;
+        echo "Unable to delete notification." . $connection->error;
     }
 
     $connection->close();

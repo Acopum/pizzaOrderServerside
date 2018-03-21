@@ -43,8 +43,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
             {
                 $updateQuery = "UPDATE user_accounts SET promotions=$newPromoNumber WHERE username = '$specifiedUser[$i]'";
                 $updatePromo = $connection->query($updateQuery);
-                echo "Notification assigned.";
             }
+
+            echo "Notification assigned.";
         }
     }
 }
