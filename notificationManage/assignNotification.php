@@ -34,11 +34,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
         for($i=0; $i<$numberUsers;$i++)
         {
+            $newPromoNumber = $specifiedPromoNo[$i]+1;
+
             //store update query in variable
             $insertQuery = "INSERT INTO assign_promotion (username, promoID) VALUES (' $specifiedUser[$i]', $idno)";
             $setNotification = $connection->query($insertQuery);
-
-            $newPromoNumber =  $specifiedPromoNo[i]+1;
 
             $updateQuery = "UPDATE user_accounts SET promotions=$newPromoNumber WHERE username = '$specifiedUser[$i]'";
             $updatePromo = $connection->query($updateQuery);
@@ -117,6 +117,7 @@ $selectNotification = $connection->query($selectQuery);
         <table>
             <tr>
                 <td>Customer Username</td>
+                <td>Active Notifications</td>
                 <td>Assign Notification</td>
             </tr>
 
@@ -131,6 +132,7 @@ $selectNotification = $connection->query($selectQuery);
 
                     //rows filled from DB
                     echo "<td>".$user."</td>";
+                    echo "<td>".$notno."</td>";
                     echo "<td><input type=\"checkbox\" name= \"userSelect[]\" value=$user></td>";
                     echo "<input type=\"hidden\" name=\"promoNum[]\" value=$notno />";
                     echo "<tr>";
