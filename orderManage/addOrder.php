@@ -28,25 +28,24 @@ if($connection->connect_error)
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
     //clean data
-    $user = cleanup($_POST["userField"]);
-    $pass = cleanup($_POST["passField"]);
-    $salt = cleanup($_POST["salt"]);
+    $cost = cleanup($_POST["costField"]);
+    $cust = cleanup($_POST["custField"]);
+    $address= cleanup($_POST["addressField"]);
 
-    if($user == "" || $pass == "" || $salt == ""){
+
+    if($cost == "" || $cust == "" || $address == ""){
         echo "<input type=\"hidden\" name=\"subUsed\" value=0 />";
         echo "One of the fields is empty";
     }
     else {
         //store queries in variable
-        $hash = md5($pass.$salt);
-        $addQuery = "INSERT INTO user_accounts VALUES ('$user', '$hash', 'admin', '$salt', 0)";
-        $addTime = "INSERT INTO user_login VALUES ('$user', 0, 0)";
+        $addQuery = "INSERT INTO pizza_orders (cost, customer_name, address) VALUES ($cost, '$cust', '$address')";
 
         //run query and check success
-        if ($connection->query($addQuery) == TRUE && $connection->query($addTime) == TRUE) {
-            echo "Admin added.";
+        if ($connection->query($addQuery) == TRUE) {
+            echo "Order added.";
         } else {
-            echo "Unable to add admin: " . $connection->error;
+            echo "Unable to add order: " . $connection->error;
         }
     }
 }
@@ -60,28 +59,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
         <?php
         //set variables to blank for update check
-        $user = $pass = $salt = "";
-        $salt = rand (10000, 99999);
+        $cost = $cust = $address = "";
 
         echo "<tr>";
-        echo "<td>Username</td>";
-        echo "<td><input type=\"text\" name=\"userField\"></td>";
+        echo "<td>Cost</td>";
+        echo "<td><input type=\"text\" name=\"costField\" maxlength=\"10\"></td>";
         echo "</tr>";
 
         echo "<tr>";
-        echo "<td>Password</td>";
-        echo "<td><input type=\"text\" name=\"passField\"></td>";
+        echo "<td>Customer Name</td>";
+        echo "<td><input type=\"text\" name=\"custField\"></td>";
         echo "</tr>";
 
         echo "<tr>";
-        echo "<td>Salt</td>";
-        echo "<td>$salt</td>";
+        echo "<td>Address</td>";
+        echo "<td><input type=\"text\" name=\"addressField\"></td>";
         echo "</tr>";
 
         //store action, id, and whether submit is used
-        echo "<input type=\"hidden\" name=\"action\" value=\"Add Admin\" />";
+        echo "<input type=\"hidden\" name=\"action\" value=\"Add Order\" />";
         echo "<input type=\"hidden\" name=\"subUsed\" value=1 />";
-        echo "<input type=\"hidden\" name=\"salt\" value=$salt />";
         ?>
 
     </table>

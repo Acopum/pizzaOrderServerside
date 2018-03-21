@@ -93,3 +93,8 @@
     <br>
     <input type="submit" value="Submit">
 </form>
+
+<?php
+//close connection
+$connection->close();
+?>

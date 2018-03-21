@@ -70,8 +70,8 @@ $orders = $connection->query($selectOrders);
 
             //action buttons
             echo "<td><form method=\"post\" action=\"orderManage\manageOrder.php\">
-                           <input type=\"submit\" name=\"action\" value=\"Edit\"/>
-                           <input type=\"submit\" name=\"action\" value=\"Remove\"/>
+                           <input type=\"submit\" name=\"action\" value=\"Modify\"/>
+                           <input type=\"submit\" name=\"action\" value=\"Cancel\"/>
                            <input type=\"hidden\" name=\"id\" value=$id />
                       </form></td>";
 
@@ -86,6 +86,10 @@ $orders = $connection->query($selectOrders);
 
 </table>
 <br>
+
+<form method="post" action="orderManage\manageOrder.php">
+    <input type="submit" name="action" value="Add Order"/>
+</form>
 
 <form action="ParetoMainMenu.php">
     <input type="submit" name="action" value="Go Back"/>

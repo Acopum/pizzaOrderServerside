@@ -19,13 +19,17 @@
 <?php
 $id = $_POST["id"];
 
-if($_POST["action"]=="Remove")
+if($_POST["action"]=="Cancel")
 {
     include('deleteOrder.php');
 }
-else if($_POST["action"]=="Edit")
+else if($_POST["action"]=="Modify")
 {
     include('editOrder.php');
+}
+else if($_POST["action"]=="Add Order")
+{
+    include('addOrder.php');
 }
 else
 {
