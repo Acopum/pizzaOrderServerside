@@ -48,6 +48,7 @@ $customers = $connection->query($selectCustomer);
     <tr>
         <td>Customer Username</td>
         <td>Active Notifications</td>
+        <td>Actions</td>
     </tr>
 
     <?php
@@ -62,6 +63,11 @@ $customers = $connection->query($selectCustomer);
             //rows filled from DB
             echo "<td>".$user."</td>";
             echo "<td>".$notno."</td>";
+
+            echo "<td><form method=\"post\" action=\"userManage\manageCustomer.php\">
+                           <input type=\"submit\" name=\"action\" value=\"View Notifications\"/>
+                           <input type=\"hidden\" name=\"username\" value=$user />
+                      </form></td>";
 
             echo "<tr>";
         }
