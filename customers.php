@@ -1,9 +1,8 @@
 <!DOCTYPE HTML>
 <html>
-<!-- Notifications-->
 <head>
     <title>
-        PPPP
+        PPPP Customers
     </title>
 </head>
 <body>
@@ -52,7 +51,7 @@ $customers = $connection->query($selectCustomer);
     </tr>
 
     <?php
-    //run through patient_data table and populate patient info page
+    //run through table and populate info page
     if($customers->num_rows > 0){
         while($row=$customers->fetch_assoc()){
             echo "<tr>";
@@ -72,9 +71,9 @@ $customers = $connection->query($selectCustomer);
             echo "<tr>";
         }
     }
-    //if patient_data is empty
+    //if is empty
     else{
-        echo " No notifications found.";
+        echo " No customers found.";
     }
     ?>
 

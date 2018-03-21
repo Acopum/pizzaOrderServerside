@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
     if(empty($specifiedUser))
     {
-        echo("No users selected");
+        echo "No users selected.";
     }
     else
     {
@@ -43,6 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
             {
                 $updateQuery = "UPDATE user_accounts SET promotions=$newPromoNumber WHERE username = '$specifiedUser[$i]'";
                 $updatePromo = $connection->query($updateQuery);
+                echo "Notification assigned.";
             }
         }
     }
@@ -124,7 +125,7 @@ $selectNotification = $connection->query($selectQuery);
             </tr>
 
             <?php
-            //run through patient_data table and populate patient info page
+            //run through table and populate info page
             if($customers->num_rows > 0){
                 while($row=$customers->fetch_assoc()){
                     echo "<tr>";
@@ -140,7 +141,7 @@ $selectNotification = $connection->query($selectQuery);
                     echo "<tr>";
                 }
             }
-            //if patient_data is empty
+            //if empty
             else{
                 echo " No notifications found.";
             }

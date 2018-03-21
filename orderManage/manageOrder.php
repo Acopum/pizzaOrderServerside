@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html>
-<!-- Customers -->
+<!-- Orders -->
 <head>
     <title>
-        PPPP Customers
+        PPPP Orders
     </title>
 </head>
 <style>
@@ -13,15 +13,19 @@
 </style>
 <body>
 <h1>
-    Customer Manager
+    Order Manager
 </h1>
 
 <?php
-$userID = $_POST["username"];
+$id = $_POST["id"];
 
-if($_POST["action"]=="View Notifications")
+if($_POST["action"]=="Remove")
 {
-    include('viewPromos.php');
+    include('deleteOrder.php');
+}
+else if($_POST["action"]=="Edit")
+{
+    include('editOrder.php');
 }
 else
 {
@@ -31,7 +35,7 @@ else
 
 <br>
 
-<form action="/TestFiles/pizzaOrderServerside/customers.php">
+<form action="/TestFiles/pizzaOrderServerside/orders.php">
     <input type="submit" name="action" value="Go Back"/>
 </form>
 

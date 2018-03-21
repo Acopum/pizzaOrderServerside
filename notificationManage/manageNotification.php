@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-<!-- Notifications -->
 <head>
     <title>
         PPPP Notifications

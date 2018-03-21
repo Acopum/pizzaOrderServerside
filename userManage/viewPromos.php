@@ -31,7 +31,7 @@
         </tr>
 
         <?php
-        //run through patient_data table and populate patient info page
+        //run through table and populate info page
         if($notifications->num_rows > 0){
             while($row=$notifications->fetch_assoc()){
                 echo "<tr>";
@@ -45,7 +45,7 @@
                 echo "<tr>";
             }
         }
-        //if patient_data is empty
+        //if empty
         else{
             echo " No notifications found.";
         }

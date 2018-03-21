@@ -1,9 +1,8 @@
 <!DOCTYPE HTML>
 <html>
-<!-- Notifications-->
 <head>
     <title>
-        PPPP Notifications
+        PPPP Admins
     </title>
 </head>
 <body>
@@ -51,7 +50,7 @@ $admins = $connection->query($selectAdmins);
     </tr>
 
     <?php
-    //run through patient_data table and populate patient info page
+    //run through table and populate info page
     if($admins->num_rows > 0){
         while($row=$admins->fetch_assoc()){
             echo "<tr>";
@@ -70,9 +69,9 @@ $admins = $connection->query($selectAdmins);
             echo "<tr>";
         }
     }
-    //if patient_data is empty
+    //if empty
     else{
-        echo " No notifications found.";
+        echo " No admins found.";
     }
     ?>
 
