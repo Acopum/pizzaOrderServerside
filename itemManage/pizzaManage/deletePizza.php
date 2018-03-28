@@ -1,6 +1,6 @@
 <?php
 //id comes from last page
-$idno = $id;
+//type comes from last page
 
 //log in for server
 $server = "192.168.194.154";
@@ -19,15 +19,19 @@ if($connection->connect_error)
 }
 
 //store queries in variable
-$deleteOrder = "DELETE FROM orders WHERE order_number=$idno";
+$deleteQuery = "DELETE FROM order_items WHERE item_id=$id AND type='$type'";
 
-if($connection->query($deleteOrder) == TRUE){
-    echo "Order successfully deleted";
+if($connection->query($deleteQuery) == TRUE){
+
+    $deleteQuery = "DELETE FROM pizzas WHERE pizza_id=$id";
+    $connection->query($deleteQuery);
+    echo "Item successfully deleted";
 }
 else{
-    echo "Unable to delete order. " . $connection->error;
+    echo "Unable to delete item." . $connection->error;
 }
 
 $connection->close();
 ?>
 
+<br>

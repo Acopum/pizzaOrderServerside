@@ -32,33 +32,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
     //clean data
     $cost = cleanup($_POST["costField"]);
-    $date= cleanup($_POST["dateField"]);
-    $customer= cleanup($_POST["customerField"]);
-    $address= cleanup($_POST["addressField"]);
+    $name= cleanup($_POST["nameField"]);
+    $size= cleanup($_POST["sizeField"]);
+    $type= cleanup($_POST["typeField"]);
+    $calories= cleanup($_POST["calField"]);
 
     //if any fields unchanged, use old info
     if($cost == ""){
         $cost = $_POST["costOld"];
     }
 
-    if($date == ""){
-        $date = $_POST["dateOld"];
+    if($name == ""){
+        $name = $_POST["nameOld"];
     }
 
-    if($customer == ""){
-        $customer = $_POST["customerOld"];
+    if($size == ""){
+        $size = $_POST["sizeOld"];
     }
 
-    if($address == ""){
-        $address = $_POST["addressOld"];
+    if($type == ""){
+        $type = $_POST["typeOld"];
+    }
+
+    if($calories == ""){
+        $calories = $_POST["calOld"];
     }
 
     //store update query in variable
-    $updateQuery = "UPDATE orders SET cost=$cost, time='$date', customer_name='$customer', address='$address' WHERE order_number = $idno";
+    $updateQuery = "UPDATE ingredients SET cost=$cost, name='$name', weight=$size, type='$type', calories=$calories WHERE ing_id = $idno";
 
     //run query and check success
     if ($connection->query($updateQuery) == TRUE) {
-        echo "Order updated successfully.";
+        echo "Ingredient updated successfully.";
     }
     else {
         echo "Error: " . $connection->error;
@@ -66,10 +71,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 }
 
 //store select queries in variable
-$selectQuery = "SELECT * FROM orders WHERE order_number = $idno";
+$selectQuery = "SELECT * FROM ingredients WHERE ing_id = $idno";
 
 //store results in variables
-$selectOrder = $connection->query($selectQuery);
+$Ingredients = $connection->query($selectQuery);
 
 ?>
 
@@ -77,23 +82,24 @@ $selectOrder = $connection->query($selectQuery);
         <table>
             <tr>
                 <th></th>
-                <th>Old Order Details</th>
-                <th>New Order Details</th>
+                <th>Old Ingredient Information</th>
+                <th>New Ingredient Information</th>
             </tr>
 
             <?php
             //initialize variables
-            $cost = $date = $customer = $address = "";
+            $calories = $cost = $name = $type = $size = "";
 
             echo "<input type=\"hidden\" name=\"subUsed\" value=0 />";
 
-            if($selectOrder->num_rows > 0){
-                while($row=$selectOrder->fetch_assoc()){
+            if($Ingredients->num_rows > 0){
+                while($row=$Ingredients->fetch_assoc()){
                     //store queried row in variables for ease of use
                     $cost =$row["cost"];
-                    $date =$row["time"];
-                    $customer =$row["customer_name"];
-                    $address =$row["address"];
+                    $name =$row["name"];
+                    $calories =$row["calories"];
+                    $type =$row["type"];
+                    $size =$row["weight"];
 
                     echo "<tr>";
                     echo "<td>ID</td>";
@@ -108,37 +114,50 @@ $selectOrder = $connection->query($selectQuery);
                     echo "</tr>";
 
                     echo "<tr>";
-                    echo "<td>Date</td>";
-                    echo "<td>$date</td>";
-                    echo "<td><input type=\"text\" name=\"dateField\"></td>";
+                    echo "<td>Name</td>";
+                    echo "<td>$name</td>";
+                    echo "<td><input type=\"text\" name=\"nameField\"></td>";
                     echo "</tr>";
 
                     echo "<tr>";
-                    echo "<td>Customer</td>";
-                    echo "<td>$customer</td>";
-                    echo "<td><input type=\"text\" name=\"customerField\"></td>";
+                    echo "<td>Type</td>";
+                    echo "<td>$type</td>";
+                    echo "<td><select name=\"typeField\">
+                            <option value=\"Crust\">Crust</option>
+                            <option value=\"Cheese\">Cheese</option>
+                            <option value=\"Sauce\">Sauce</option>
+                            <option value=\"Topping\">Topping</option>
+                          </select></td>";
                     echo "</tr>";
 
                     echo "<tr>";
-                    echo "<td>Address</td>";
-                    echo "<td>$address</td>";
-                    echo "<td><input type=\"text\" name=\"addressField\"></td>";
+                    echo "<td>Calorie Content</td>";
+                    echo "<td>$calories</td>";
+                    echo "<td><input type=\"text\" name=\"calField\"></td>";
                     echo "</tr>";
+
+                    echo "<tr>";
+                    echo "<td>Size</td>";
+                    echo "<td>$size</td>";
+                    echo "<td><input type=\"text\" name=\"sizeField\"></td>";
+                    echo "</tr>";
+
 
                     //store action, id, and whether submit is used
-                    echo "<input type=\"hidden\" name=\"action\" value=\"Edit\" />";
+                    echo "<input type=\"hidden\" name=\"action\" value=\"Modify\" />";
                     echo "<input type=\"hidden\" name=\"id\" value=$idno />";
                     echo "<input type=\"hidden\" name=\"subUsed\" value=1 />";
 
                     //store old data for POST
                     echo "<input type=\"hidden\" name=\"costOld\" value= \"$cost\" />";
-                    echo "<input type=\"hidden\" name=\"dateOld\" value= \"$date\" />";
-                    echo "<input type=\"hidden\" name=\"customerOld\" value= \"$customer\" />";
-                    echo "<input type=\"hidden\" name=\"addressOld\" value= \"$address\" />";
+                    echo "<input type=\"hidden\" name=\"nameOld\" value= \"$name\" />";
+                    echo "<input type=\"hidden\" name=\"typeOld\" value= \"$type\" />";
+                    echo "<input type=\"hidden\" name=\"sizeOld\" value= \"$size\" />";
+                    echo "<input type=\"hidden\" name=\"calOld\" value= \"$calories\" />";
                 }
             }
             else{
-                echo "No order found!";
+                echo "No ingredient found!";
             }
             ?>
 

@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
     }
     else {
         //store queries in variable
-        $addQuery = "INSERT INTO pizza_orders (cost, customer_name, address) VALUES ($cost, '$cust', '$address')";
+        $addQuery = "INSERT INTO orders (cost, customer_name, address) VALUES ($cost, '$cust', '$address')";
 
         //run query and check success
         if ($connection->query($addQuery) == TRUE) {

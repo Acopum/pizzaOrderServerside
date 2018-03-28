@@ -19,13 +19,13 @@ if($connection->connect_error)
 }
 
 //store queries in variable
-$deleteOrder = "DELETE FROM orders WHERE order_number=$idno";
+$deleteQuery = "DELETE FROM ingredients WHERE ing_id=$idno";
 
-if($connection->query($deleteOrder) == TRUE){
-    echo "Order successfully deleted";
+if($connection->query($deleteQuery) == TRUE){
+    echo "Ingredient successfully deleted";
 }
 else{
-    echo "Unable to delete order. " . $connection->error;
+    echo "Unable to delete ingredient. " . $connection->error;
 }
 
 $connection->close();

@@ -12,11 +12,11 @@
     }
 </style>
 <h1>
-    Orders Manager
+    Ingredients Manager
 </h1>
 
 <p>
-    This menu allows you to manage outbound orders.
+    This menu allows you to manage ingredients.
 </p>
 
 <?php
@@ -37,42 +37,43 @@ if($connection->connect_error)
 }
 
 //store queries in variable
-$selectOrders = "SELECT * FROM orders ";
+$selectIng = "SELECT * FROM ingredients ";
 
 //store results
-$orders = $connection->query($selectOrders);
+$ingredients = $connection->query($selectIng);
 ?>
 
 <table>
     <tr>
         <td>ID</td>
+        <td>Name</td>
         <td>Cost</td>
-        <td>Date</td>
-        <td>Customer</td>
-        <td>Address</td>
+        <td>Size</td>
+        <td>Type</td>
+        <td>Calorie Content</td>
         <td>Available Actions</td>
     </tr>
 
     <?php
     //run through table and populate info page
-    if($orders->num_rows > 0){
-        while($row=$orders->fetch_assoc()){
+    if($ingredients->num_rows > 0){
+        while($row=$ingredients->fetch_assoc()){
             echo "<tr>";
 
-            $id = $row["order_number"];
+            $id = $row["ing_id"];
 
             //rows filled from DB
             echo "<td>".$id."</td>";
+            echo "<td>".$row["name"]."</td>";
             echo "<td>$".$row["cost"]."</td>";
-            echo "<td>".$row["time"]."</td>";
-            echo "<td>".$row["customer_name"]."</td>";
-            echo "<td>".$row["address"]."</td>";
+            echo "<td>".$row["weight"]."g</td>";
+            echo "<td>".$row["type"]."</td>";
+            echo "<td>".$row["calories"]." Cal</td>";
 
             //action buttons
-            echo "<td><form method=\"post\" action=\"orderManage\manageOrder.php\">
-                           <input type=\"submit\" name=\"action\" value=\"View Contents\"/>
-                           <input type=\"submit\" name=\"action\" value=\"Modify Details\"/>
-                           <input type=\"submit\" name=\"action\" value=\"Cancel Order\"/>
+            echo "<td><form method=\"post\" action=\"ingredientManage\manageIngredient.php\">
+                           <input type=\"submit\" name=\"action\" value=\"Modify\"/>
+                           <input type=\"submit\" name=\"action\" value=\"Remove\"/>
                            <input type=\"hidden\" name=\"id\" value=$id />
                       </form></td>";
 
@@ -81,15 +82,15 @@ $orders = $connection->query($selectOrders);
     }
     //if empty
     else{
-        echo " No orders found.";
+        echo " No ingredients found.";
     }
     ?>
 
 </table>
 <br>
 
-<form method="post" action="orderManage\manageOrder.php">
-    <input type="submit" name="action" value="Add Order"/>
+<form method="post" action="ingredientManage\manageIngredient.php">
+    <input type="submit" name="action" value="Add New Ingredient"/>
 </form>
 
 <form action="ParetoMainMenu.php">
