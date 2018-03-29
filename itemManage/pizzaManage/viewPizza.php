@@ -26,12 +26,6 @@ if($connection->connect_error)
 
 ?>
 
-    <table>
-        <tr>
-            <td></td>
-            <td>Item Data</td>
-        </tr>
-
         <?php
 
         $selectQuery = "SELECT * FROM pizzas WHERE pizza_id = $id";
@@ -43,6 +37,13 @@ if($connection->connect_error)
 
         if($pizzaInfo->num_rows>0)
         {
+
+            echo "<table>
+                    <tr>
+                        <td></td>
+                        <td>Item Data</td>
+                    </tr>";
+
             while($row=$pizzaInfo->fetch_assoc()) {
                 $cost  = $row["cost"];
                 $size = $row["size"];

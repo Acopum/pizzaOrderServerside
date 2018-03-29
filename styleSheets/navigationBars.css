@@ -1,3 +1,7 @@
+/* CUSTOM CLASSES */
+
+/* Site Banner */
+
 .topBanner{
     padding: 10px 30px;
     margin-top: -10px;
@@ -9,6 +13,8 @@
     z-index: 3;
     position: absolute;
 }
+
+/* Top navigation bar */
 
 .topBar {
     background-color: #333;
@@ -38,12 +44,101 @@
     color: white;
 }
 
+/* Main area of page  */
+
 .mainArea{
-    position:absolute;
-    margin-top: 138px;
-    margin-left: -9px;
+    padding: 140px 20px;
 }
+
+/* ELEMENTS */
+
+/* Whole table */
 
 html{
     font-family: Georgia;
 }
+
+/* Input elements */
+
+input[type=button], input[type=submit] {
+    padding: 5px;
+    border: 3px solid #000000;
+    border-style:inset;
+    background-color: #827a7a;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=file]:hover {
+    padding: 5px;
+    border: 2px solid #000000;
+    background-color: #5AD8FF;
+    cursor: pointer;
+}
+
+input[type=text], input[type=number] {
+    padding: 3px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}
+input[type=text]:hover, input[type=number]:hover {
+    padding: 3px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    cursor: text;
+}
+
+select {
+    padding: 3px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+
+}
+select:hover {
+    padding: 3px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Table elements */
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td{
+    border: 2px solid black;
+
+}
+
+th, td {
+    padding: 5px;
+    text-align:center;
+}
+
+tr:nth-child(odd) {
+    background-color: red;
+    font-weight: bold;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
+td>select{
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}
+

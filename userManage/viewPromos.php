@@ -21,18 +21,18 @@
     //store results
     $notifications = $connection->query($selectNotification);
 ?>
-
-    <table>
-        <tr>
-            <td>ID</td>
-            <td>Date</td>
-            <td>Type</td>
-            <td>Content</td>
-        </tr>
-
         <?php
         //run through table and populate info page
         if($notifications->num_rows > 0){
+
+            echo "<table>
+                <tr>
+                    <td>ID</td>
+                    <td>Date</td>
+                    <td>Type</td>
+                    <td>Content</td>
+                </tr>";
+
             while($row=$notifications->fetch_assoc()){
                 echo "<tr>";
 

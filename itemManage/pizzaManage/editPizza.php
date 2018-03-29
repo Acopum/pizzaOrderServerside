@@ -85,12 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 }
 ?>
 <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
-    <table>
-        <tr>
-            <td></td>
-            <td>Old Item Data</td>
-            <td>New Item Data</td>
-        </tr>
 
         <?php
 
@@ -103,6 +97,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
 
         if($pizzaInfo->num_rows>0)
         {
+
+            echo "<table>
+                    <tr>
+                        <td></td>
+                        <td>Old Item Data</td>
+                        <td>New Item Data</td>
+                    </tr>";
+
             while($row=$pizzaInfo->fetch_assoc())
             {
                 $cost = $costOld = $row["cost"];

@@ -74,12 +74,6 @@ $selectOrder = $connection->query($selectQuery);
 ?>
 
     <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
-        <table>
-            <tr>
-                <th></th>
-                <th>Old Order Details</th>
-                <th>New Order Details</th>
-            </tr>
 
             <?php
             //initialize variables
@@ -88,6 +82,14 @@ $selectOrder = $connection->query($selectQuery);
             echo "<input type=\"hidden\" name=\"subUsed\" value=0 />";
 
             if($selectOrder->num_rows > 0){
+
+                echo "<table>
+                        <tr>
+                            <th></th>
+                            <th>Old Order Details</th>
+                            <th>New Order Details</th>
+                        </tr> ";
+
                 while($row=$selectOrder->fetch_assoc()){
                     //store queried row in variables for ease of use
                     $cost =$row["cost"];

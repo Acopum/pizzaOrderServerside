@@ -79,12 +79,7 @@ $Ingredients = $connection->query($selectQuery);
 ?>
 
     <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
-        <table>
-            <tr>
-                <th></th>
-                <th>Old Ingredient Information</th>
-                <th>New Ingredient Information</th>
-            </tr>
+
 
             <?php
             //initialize variables
@@ -93,6 +88,14 @@ $Ingredients = $connection->query($selectQuery);
             echo "<input type=\"hidden\" name=\"subUsed\" value=0 />";
 
             if($Ingredients->num_rows > 0){
+
+                echo "<table>
+                        <tr>
+                            <th></th>
+                            <th>Old Ingredient Information</th>
+                            <th>New Ingredient Information</th>
+                        </tr>";
+
                 while($row=$Ingredients->fetch_assoc()){
                     //store queried row in variables for ease of use
                     $cost =$row["cost"];

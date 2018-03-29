@@ -59,17 +59,20 @@ $selectNotification = $connection->query($selectQuery);
 ?>
 
     <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
-        <table>
-            <tr>
-                <th></th>
-                <th>Notification Data</th>
-            </tr>
+
 
             <?php
 
             echo "<input type=\"hidden\" name=\"subUsed\" value=0 />";
 
             if($selectNotification->num_rows > 0){
+
+                echo "<table>
+                        <tr>
+                            <th></th>
+                            <th>Notification Data</th>
+                        </tr>";
+
                 while($row=$selectNotification->fetch_assoc()){
                     //store queried row in variables for ease of use
                     $type =$row["notification_type"];

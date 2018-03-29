@@ -25,16 +25,17 @@ $selectQuery = "SELECT * FROM order_items ";
 $contents = $connection->query($selectQuery);
 ?>
 
-    <table>
-        <tr>
-            <td>Item Category</td>
-            <td>Item ID</td>
-            <td>Available Actions</td>
-        </tr>
-
         <?php
         //run through table and populate info page
         if($contents->num_rows > 0){
+
+            echo "<table>
+                    <tr>
+                        <td>Item Category</td>
+                        <td>Item ID</td>
+                        <td>Available Actions</td>
+                    </tr>";
+
             while($row=$contents->fetch_assoc()){
                 echo "<tr>";
 
