@@ -82,7 +82,6 @@ input[type=button]:hover, input[type=submit]:hover, input[type=file]:hover {
 input[type=text], input[type=number] {
     padding: 3px;
     border: 1px solid #000000;
-    border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
     -webkit-box-sizing:border-box;
@@ -91,20 +90,17 @@ input[type=text], input[type=number] {
 input[type=text]:hover, input[type=number]:hover {
     padding: 3px;
     border: 1px solid #000000;
-    border-radius: 4px;
     cursor: text;
 }
 
 select {
     padding: 3px;
     border: 1px solid #000000;
-    border-radius: 4px;
 
 }
 select:hover {
     padding: 3px;
     border: 1px solid #000000;
-    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -125,13 +121,17 @@ th, td {
     text-align:center;
 }
 
-tr:nth-child(odd) {
+tr:nth-child(1) {
     background-color: red;
     font-weight: bold;
     color: white;
 }
 
 tr:nth-child(even) {
+    background-color: white;
+}
+
+tr:nth-child(even+1) {
     background-color: white;
 }
 
