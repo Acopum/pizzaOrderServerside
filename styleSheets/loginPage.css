@@ -14,7 +14,7 @@ form {
 }
 
 input[type=text], input[type=password] {
-    text-align: center;
+    text-align: left;
     width: 75%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -29,7 +29,7 @@ button {
     color: white;
     padding: 10px 20px;
     margin: 4px 0;
-    border: inset;
+    border-style: inset;
     border-color: black;
     cursor: pointer;
     width: 75%;
