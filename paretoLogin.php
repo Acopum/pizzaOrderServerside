@@ -1,16 +1,17 @@
 <!DOCTYPE HTML>
 <html>
-<!-- Login for Admin-->
 <head>
     <title>
         PPPP Login
     </title>
+    <link rel="stylesheet" type="text/css" href="styleSheets/loginPage.css">
 </head>
 <body>
-<h1>
-    Administrator Login
-</h1>
-
+<div class="banner">
+    <h1>
+        ADMINISTRATOR LOGIN
+    </h1>
+</div>
 <?php
 
     //clean submitted data for dangerous characters
@@ -25,19 +26,20 @@
 ?>
 
 <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
-    <div class="container">
-        <label><b>Username:</b></label>
-        <input type="text" placeholder="" name="username" required>
-
+    <div class = "imgContainer">
+        <img src="images/italiaBoromito.png" alt="deep-normified meme">
+    </div>
+    <div class="inputFields">
+        <label><b>Username</b></label>
+        <input type="text" name="username" required>
         <label><b>Password</b></label>
-        <input type="password" placeholder="" name="password" required>
+        <input type="password" name="password" required>
 
         <button type="submit">Login</button>
     </div>
 </form>
-
+<div class="messages">
 <?php
-
     $user = $password = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -78,8 +80,10 @@
                 //store results in variable
                 $sqlpass = $connection->query($sql_check);
 
-                if($sqlpass->num_rows >0){
-                    while($retrieveDB = $sqlpass->fetch_assoc()){
+
+
+                if($sqlpass->num_rows>0){
+                        $retrieveDB = $sqlpass->fetch_assoc();
                         if($numFails == 3)
                         {
                             if((time()-$lastLogin) > 10*60 )
@@ -105,24 +109,26 @@
 
                         }
                         else{
-                            echo "Login credentials invalid.";
+                            echo "Incorrect password.";
                             $numFails++;
                             $lastLogin = time();
 
                             $updateLogin = "UPDATE user_login SET login_attempt_num=$numFails, last_login_attempt=$lastLogin WHERE username = '$user'";
                             $connection->query($updateLogin);
                         }
-                    }
+
                 }
                 else {
-                    echo "Username not recognized.";
+                    echo "No login information found.";
                 }
             }
         }
+        else{
+            echo "Username not recognized.";
+        }
 
     }
-
 ?>
-
+</div>
 </body>
 </html>
