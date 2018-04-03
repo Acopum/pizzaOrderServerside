@@ -19,13 +19,14 @@ if($connection->connect_error)
 }
 
 //store queries in variable
-$selectQuery = "SELECT * FROM order_items ";
+$selectQuery = "SELECT * FROM order_items WHERE order_number=$orderID";
 
 //store results
 $contents = $connection->query($selectQuery);
 ?>
 
         <?php
+		
         //run through table and populate info page
         if($contents->num_rows > 0){
 
