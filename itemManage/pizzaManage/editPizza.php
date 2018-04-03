@@ -362,6 +362,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["subUsed"]==1){
                 echo "<input type=\"hidden\" name=\"subUsed\" value=1 />";
                 echo "<input type=\"hidden\" name=\"type\" value=\"Pizza\" />";
                 echo "<input type=\"hidden\" name=\"id\" value=$id />";
+				echo "<input type=\"hidden\" name=\"order\" value=$orderID />";
 
                 echo "<input type=\"hidden\" name=\"costOld\" value=$costOld />";
                 echo "<input type=\"hidden\" name=\"sizeOld\" value=$sizeOld />";

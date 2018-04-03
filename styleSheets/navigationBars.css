@@ -74,8 +74,9 @@ input[type=button], input[type=submit] {
 
 input[type=button]:hover, input[type=submit]:hover, input[type=file]:hover {
     padding: 5px;
-    border: 2px solid #000000;
-    background-color: #5AD8FF;
+    border: 3px solid #000000;
+    background-color: white;
+	color: black;
     cursor: pointer;
 }
 
@@ -142,3 +143,21 @@ td>select{
     -moz-box-sizing: border-box;
 }
 
+.topBanner:hover{
+    /*animation: shake 0.5s;*/
+    /*animation-iteration-count: infinite;*/
+}
+
+@keyframes shake {
+    0% { transform: translate(50px, 5px) rotate(0deg); }
+    10% { transform: translate(-50px, -50px) rotate(-1deg); }
+    20% { transform: translate(-50px, 50px) rotate(1deg); }
+    30% { transform: translate(5px, 50px) rotate(0deg); }
+    40% { transform: translate(50px, -50px) rotate(1deg); }
+    50% { transform: translate(-50px, 5px) rotate(-1deg); }
+    60% { transform: translate(-50px, 50px) rotate(0deg); }
+    70% { transform: translate(5px, 50px) rotate(-1deg); }
+    80% { transform: translate(-50px, -50px) rotate(1deg); }
+    90% { transform: translate(50px, 5px) rotate(0deg); }
+    100% { transform: translate(50px, -50px) rotate(-1deg); }
+}
