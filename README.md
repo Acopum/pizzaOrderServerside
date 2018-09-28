@@ -4,7 +4,7 @@ Web application meant to be connected to a MySQL database. Companion application
 
 ## Purpose
 
-To build a web application used to service SQL transactions and operations from a MySQL database.
+To build a web application used to service SQL transactions and operations from a SQL database using the Agile Development methodology.
 
 ## Repo Contents
 
@@ -42,5 +42,25 @@ To build a web application used to service SQL transactions and operations from 
 ## Description
 
 This web application is meant to be used with a MySQL DB and uses appropriate PHP syntax as a result. Database calls are done right in PHP script. A companion mobile application makes use of notifications packaged by the web application, mainly pertaining to current orders.
+
+The web applications itself was developed with Agile methodologies in mind, making use of Trello for simple story management. Stories encompassed usable features during development, and a burndown analysis was conducted. Effectiveness of the Agile method was also examined.
+
+### System Structure
+
+
+
+![architecture](reportImages/sysArch.PNG)
+
+### Use of Agile Method
+
+![stories](reportImages/storyEx.PNG)
+
+![burndown](reportImages/burndown.PNG)
+
+### Development Results
+
+![mobile](reportImages/mobileApp.PNG)
+
+![web](reportImages/webApp.PNG)
 
 
